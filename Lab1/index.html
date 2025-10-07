@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book-Explorer</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #b45309;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <script type="module" src="index.js" defer></script>
+</head>
+
+<body class="font-sans bg-black">
+    <header class="z-20 fixed w-full bg-gray-900 text-amber-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="font-bold text-2xl shadow-md text-amber-700">Book Explorer</h1>
+            <nav>
+                <ul class="flex flex-wrap gap-4">
+                    <li><a href="index.html" class="hover:underline text-amber-600 transition-colors font-bold">Home</a>
+                    </li>
+                    <li><a href="../Lab2/favorite.html"
+                            class="hover:underline text-amber-600 transition-colors font-bold">Favorites</a></li>
+                    <li><a href="about.html"
+                            class="hover:underline text-amber-600 transition-colors font-bold">About</a></li>
+                    <li><a href="login.html"
+                            class="hover:underline text-amber-600 transition-colors font-bold">Sign-In</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+    <section>
+        <div id="ome">
+            <!-- Hero Section -->
+            <div class="bg-gradient-to-r from-red-900 to-amber-900 text-white py-16 rounded-lg">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Discover Your Next Great Read</h2>
+                    <p class="text-lg md:text-xl mb-8">Search through thousands of books and save your favorites</p>
+
+                    <!-- Search Bar -->
+                    <div class="max-w-2xl mx-auto">
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input type="text" id="search-input" placeholder="Search for books by title..."
+                                class="flex-1 px-4 py-3 rounded-lg text-gray-300 focus:outline focus:ring-2 focus:ring-purple-300">
+                            <button onclick="searchBooks()"
+                                class="bg-white text-amber-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-900 transition">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Books Grid -->
+            <div class="container mx-auto px-4 py-8 bg-gray-900 rounded-lg shadow-lg">
+                <div id="loading" class="hidden flex justify-center items-center py-20">
+                    <div class="spinner"></div>
+                </div>
+
+                <div id="no-results" class="hidden text-center py-20">
+                    <p class="text-gray-600 text-xl">No books found. Try a different search term.</p>
+                </div>
+
+                <div id="books-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Books will be populated here -->
+                    <!-- Placeholder Cards (will be replaced by API data) -->
+                    <div
+                        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition transform hover:scale-105">
+                        <div class="h-64 bg-gray-300 flex items-center justify-center">Book 1</div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Book Title</h3>
+                            <p class="text-gray-600 text-sm mb-3">Author Name</p>
+                            <button
+                                class="w-full bg-amber-900 hover:bg-amber-800 text-white py-2 px-4 rounded transition">
+                                Add to Favorites
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition transform hover:scale-105">
+                        <div class="h-64 bg-gray-300 flex items-center justify-center">Book 2</div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Another Book</h3>
+                            <p class="text-gray-600 text-sm mb-3">Another Author</p>
+                            <button
+                                class="w-full bg-amber-900 hover:bg-amber-800 text-white py-2 px-4 rounded transition">
+                                Add to Favorites
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition transform hover:scale-105">
+                        <div class="h-64 bg-gray-300 flex items-center justify-center">Book 3</div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Third Book</h3>
+                            <p class="text-gray-600 text-sm mb-3">Third Author</p>
+                            <button
+                                class="w-full bg-amber-900 hover:bg-red-900 text-white py-2 px-4 rounded transition">
+                                Add to Favorites
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition transform hover:scale-105">
+                        <div class="h-64 bg-gray-300 flex items-center justify-center">Book 4</div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Fourth Book</h3>
+                            <p class="text-gray-600 text-sm mb-3">Fourth Author</p>
+                            <button
+                                class="w-full bg-amber-900 hover:bg-red-900 text-white py-2 px-4 rounded transition">
+                                Add to Favorites
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-12">
+        <div class="container mx-auto px-4 py-6 text-center">
+            <p class="text-xl text-amber-800"><i>By Deborah TETA</i></p>
+            <p>&copy; 2025 Book Explorer...</p>
+        </div>
+    </footer>
+</body>
+
+</html>
